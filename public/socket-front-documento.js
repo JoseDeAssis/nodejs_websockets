@@ -2,8 +2,14 @@ import { updateTextEditor } from "./documento.js";
 
 const socket = io();
 
-function textEditorEmitter(text) {
-  socket.emit("texto_editor", text);
+function selectDocument(nome) {
+  socket.emit("selecionar_documento", nome, (text) => {
+    updateTextEditor(text);
+  });
+}
+
+function textEditorEmitter(data) {
+  socket.emit("texto_editor", data);
 }
 
 socket.on("texto_editor_clientes", (texto) => {
@@ -15,4 +21,4 @@ socket.on("disconnect", (motivo) => {
   Motivo: ${motivo}`);
 });
 
-export {textEditorEmitter};
+export { textEditorEmitter, selectDocument };
