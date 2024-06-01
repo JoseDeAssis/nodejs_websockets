@@ -1,4 +1,4 @@
-import { updateTextEditor } from "./documento.js";
+import { alertAndRedirect, updateTextEditor } from "./documento.js";
 
 const socket = io();
 
@@ -12,6 +12,10 @@ function textEditorEmitter(data) {
   socket.emit("texto_editor", data);
 }
 
+function deleteDocument(name) {
+  socket.emit("excluir_documento", name);
+}
+
 socket.on("texto_editor_clientes", (texto) => {
   updateTextEditor(texto);
 })
@@ -21,4 +25,8 @@ socket.on("disconnect", (motivo) => {
   Motivo: ${motivo}`);
 });
 
-export { textEditorEmitter, selectDocument };
+socket.on("documento_excluido", (name) => {
+  alertAndRedirect(name);
+});
+
+export { textEditorEmitter, selectDocument, deleteDocument };

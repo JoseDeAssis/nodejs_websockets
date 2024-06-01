@@ -1,16 +1,37 @@
 import 'dotenv/config';
-import { documents } from "./dbConnect.js";
+import { documentCollection } from "./dbConnect.js";
+
+function getDocuments() {
+  const documents = documentCollection.find().toArray();
+  
+  return documents;
+}
 
 function findDocument(name) {
-  const document = documents.findOne({ name: name });
+  const document = documentCollection.findOne({ name: name });
 
   return document;
 }
 
+function createDocument(name) {
+  const result = documentCollection.insertOne({
+    name,
+    text: ""
+  });
+
+  return result;
+}
+
 function updateDocument(name, text) {
-  const update = documents.updateOne({ name }, { $set: { text }});
+  const update = documentCollection.updateOne({ name }, { $set: { text }});
 
   return update;
 }
 
-export { findDocument, updateDocument };
+function deleteDocument(name) {
+  const result = documentCollection.deleteOne({ name });
+
+  return result;
+}
+
+export { findDocument, updateDocument, getDocuments, createDocument, deleteDocument };
