@@ -1,4 +1,3 @@
-import 'dotenv/config';
 import { documentCollection } from "./dbConnect.js";
 
 function getDocuments() {

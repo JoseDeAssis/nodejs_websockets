@@ -8,7 +8,6 @@ function registrarEventosLogin(socket, io) {
 
     if(userData) {
       const tokenJwt = gerarJwt({ user }); 
-      console.log(tokenJwt);
       const authenticated = authenticateUser(password, userData);
 
       if(authenticated) {

@@ -1,4 +1,3 @@
-import 'dotenv/config';
 import { usersCollection } from "./dbConnect.js";
 import criaHashESalSenha from '../utils/criaHashESalSenha.js';
 

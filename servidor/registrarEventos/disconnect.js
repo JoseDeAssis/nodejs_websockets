@@ -1,8 +1,8 @@
-function registrarEventosDisconectar(socket) {
+function registrarEventosDesconectar(socket) {
   socket.on("disconnect", (motivo) => {
     console.log(`Cliente "${socket.id}" desconectado!
     Motivo: ${motivo}`);
   });
 }
 
-export default registrarEventosDisconectar;
+export default registrarEventosDesconectar;
